@@ -1,3 +1,13 @@
+let dispVal;
+
+const btns = document.querySelectorAll('button');
+
+const display = document.querySelector('#display');
+
+btns.forEach.addEventListener("click", (btn) => {
+
+});
+
 function add(a, b) {
     return a + b;
 };
