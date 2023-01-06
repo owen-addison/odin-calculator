@@ -1,29 +1,42 @@
-let dispVal;
-
-const btns = document.querySelectorAll('button');
+let dispVal = "";
 
 const display = document.querySelector('#display');
 
-btns.forEach.addEventListener("click", (btn) => {
+const buttons = document.querySelectorAll('button');
 
+console.log(typeof(dispVal));
+
+// Changes display on click of button
+buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+        const btnText = btn.textContent; // Get text of button
+        display.textContent = dispVal.concat(btnText);
+        dispVal = dispVal.concat(btnText);
+        // dispVal = dispVal.concat(btnText);
+    });
 });
 
+// Addition function
 function add(a, b) {
     return a + b;
 };
 
+// Subtraction function
 const subtract = function(a, b) {
 	return a - b;
 };
 
+// Multiplication function
 const multiply = function(a, b) {
     return a * b;
 };
 
+// Division function
 const divide = function(a, b) {
     return a / b;
 };
 
+// Call correct operation
 const operate = function(operator, a, b) {
     operator = operator.toLowerCase();
     a = Number(a);
