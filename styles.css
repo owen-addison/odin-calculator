@@ -1,0 +1,11 @@
+.display {
+    background-color: aquamarine;
+    /* width: 100px;
+    height: 100px; */
+    padding: 20px;
+}
+
+.display div {
+    background-color: red;
+    padding: 20px;
+}
