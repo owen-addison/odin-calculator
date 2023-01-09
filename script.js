@@ -9,6 +9,9 @@ let prevNum = '';
 let currNum = '';
 let operator = '';
 
+let opClicked = false;
+
+
 const currentDisplay = document.querySelector('.currentNumber');
 const previousDisplay = document.querySelector('.previousNumber');
 
@@ -33,7 +36,6 @@ equals.addEventListener('click', () => {
 });
 
 
-
 // Add event listener to number buttons
 buttons.forEach(btn => {
     btn.addEventListener('click', (e) => {
@@ -54,7 +56,17 @@ operators.forEach(btn => {
 });
 
 function handleOperator(op) {
-    // console.log(prevNum, currNum);
+    console.log(operator, op);
+
+    if (operator === 'x' && op === '-') {
+        currNum = op;
+        changeCurrentDisplay(currNum);
+        return;
+    } else if (operator === '/' && op === '-') {
+        currNum = op;
+        changeCurrentDisplay(currNum);
+        return;
+    }
 
     if (prevNum === '') {
         prevNum = currNum;
@@ -67,19 +79,23 @@ function handleOperator(op) {
         currNum = '';
         changeCurrentDisplay('0');
         changePreviousDisplay(prevNum + ' ' + operator);
-
-        console.log(prevNum, currNum);
     }
 
-    // operator = op;
-    // prevNum = currNum;
-    // currNum = '';
+    /* Add boolean for operatorClicked
+        - If true and op to be handled is -
+            - Add operator to currNum
+            - Display currNum
+            - Return
+        - If true and op is not -, return without doing anything
+            - Return
+        - Else carry out rest of function
+    */
 }
 
 function operatorCheck(string) {
     operator = string;
-    previousDisplay.textContent = prevNum + ' ' + operator;
-    currentDisplay.textContent = '0';
+    changePreviousDisplay(prevNum + ' ' + operator);
+    changeCurrentDisplay('0');
     currNum = '';
 }
 
