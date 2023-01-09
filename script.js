@@ -18,7 +18,17 @@ const operators = document.querySelectorAll('.btn-op');
 
 const clrBtnID = document.getElementById('btn-clr').id;
 
+const clearBtn = document.querySelector('#btn-clr');
+// Add event listener to clear button to call operate function
+clearBtn.addEventListener('click', clearAll);
+
 const eqlBtnID = document.getElementById('btn-eql').id;
+
+const equals = document.querySelector('#btn-eql');
+// Add event listener to equals button to call operate function
+equals.addEventListener('click', operate);
+
+
 
 // Add event listener to number buttons
 buttons.forEach(btn => {
@@ -42,10 +52,13 @@ operators.forEach(btn => {
 function handleOperator(op) {
     operator = op;
     prevNum = currNum;
-    changePreviousDisplay(prevNum + operator);
+    changePreviousDisplay(prevNum + ' ' + operator);
     currNum = '';
     changeCurrentDisplay(currNum);
+    // console.log(operator);
 }
+
+
 
 // OLD FUNCTION
 // buttons.forEach((btn, i) => {
@@ -130,6 +143,14 @@ divIndex = objArray.findIndex(obj => obj.name === 'btn-div');
 subIndex = objArray.findIndex(obj => obj.name === 'btn-sub');
 plusIndex = objArray.findIndex(obj => obj.name === 'btn-plus');
 
+// Clear fucntion
+function clearAll() {
+    prevNum = '';
+    currNum = '';
+    changePreviousDisplay(prevNum);
+    changeCurrentDisplay(currNum);
+}
+
 // Change display function
 function changeCurrentDisplay(string) {
     currentDisplay.textContent = string;
@@ -162,19 +183,27 @@ const divide = function(a, b) {
 };
 
 // Call correct operation
-const operate = function(operator, a, b) {
+function operate() {
     operator = operator.toLowerCase();
-    a = Number(a);
-    b = Number(b);
+    const a = Number(prevNum);
+    const b = Number(currNum);
+    let result = 0;
 
     // Return correct operation
     if ( operator === '+' ) {
-        return add(a, b);
+        result = add(a, b);
     } else if ( operator === '-' ) {
-        return subtract(a, b);
+        result = subtract(a, b);
     } else if ( operator === '*' || operator.toLowerCase() === 'x' ) {
-        return multiply(a, b);
+        result = multiply(a, b);
     } else if ( operator === '/' ) {
-        return divide(a, b);
+        result = divide(a, b);
     }
+
+    result = result.toString();
+    prevNum = result;
+    currNum = prevNum;
+
+    changePreviousDisplay('');
+    changeCurrentDisplay(currNum);
 };
