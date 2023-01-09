@@ -12,7 +12,7 @@ let opClicked = false;
 const currentDisplay = document.querySelector('.currentNumber');
 const previousDisplay = document.querySelector('.previousNumber');
 
-// window.addEventListener('')
+window.addEventListener('keydown', handleKeyPress);
 
 const buttons = document.querySelectorAll('.btn-num');
 
@@ -91,7 +91,7 @@ function operatorCheck(string) {
     currNum = '';
 }
 
-// Clear fucntion
+// Clear function
 function clearAll() {
     prevNum = '';
     currNum = '';
@@ -167,13 +167,49 @@ function operate() {
     currNum = result;
     prevNum = result;
 
-
-    
     changeCurrentDisplay(currNum);
     changePreviousDisplay('');
-    
+
+    currNum = '';
+    // console.log(currNum, prevNum);
 };
 
 function roundNumber(num) {
     return Math.round(num * 100000) / 100000;
+}
+
+function handleKeyPress(e) {
+    e.preventDefault();
+    if (e.key >= 0 && e.key <= 9) {
+        handleNumber(e.key);
+    }
+    if (e.key === '.') {
+        handleNumber(e.key);
+    }
+    if (e.key === "Enter" || e.key === "=" && currNum != '' && prevNum != '') {
+        operate();
+    }
+    if (e.key === '+' || e.key === '-' || e.key === '/') {
+        handleOperator(e.key);
+    }
+    if (e.key === '*') {
+        handleOperator('x');
+    }
+    if (e.key === 'Backspace') {
+        handleDelete();
+    }
+}
+
+function handleDelete() {
+    if (currNum != '') {
+        currNum = currNum.slice(0, -1);
+        changeCurrentDisplay(currNum);
+        if (currNum === '') {
+            changeCurrentDisplay('0');
+        }
+    }
+    if (currNum === '' && prevNum !== '' && operator === '') {
+        prevNum = prevNum.slice(0, -1);
+        changeCurrentDisplay(prevNum);
+    }
 }
