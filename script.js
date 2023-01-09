@@ -213,6 +213,7 @@ function operate() {
         }
     }
 
+    result = roundNumber(result);
     result = result.toString();
     prevNum = result;
     currNum = prevNum;
@@ -220,3 +221,7 @@ function operate() {
     changePreviousDisplay('');
     changeCurrentDisplay(currNum);
 };
+
+function roundNumber(num) {
+    return Math.round(num * 100000) / 100000;
+}
