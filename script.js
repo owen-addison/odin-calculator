@@ -153,8 +153,11 @@ function clearAll() {
 
 // Change display function
 function changeCurrentDisplay(string) {
-    currentDisplay.textContent = string;
-    // console.table(objArray);
+    if (string.length <= 11) {
+        currentDisplay.textContent = string;
+    } else {
+        currentDisplay.textContent = string.slice(0, 11) + "...";
+    }
 };
 
 function changePreviousDisplay(string) {
@@ -197,7 +200,17 @@ function operate() {
     } else if ( operator === '*' || operator.toLowerCase() === 'x' ) {
         result = multiply(a, b);
     } else if ( operator === '/' ) {
-        result = divide(a, b);
+        if (b <= 0)
+        {
+            result = "ERROR";
+            clearAll();
+
+            changePreviousDisplay('');
+            changeCurrentDisplay(result);
+            return;
+        } else {
+            result = divide(a, b);
+        }
     }
 
     result = result.toString();
