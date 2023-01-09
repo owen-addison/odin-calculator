@@ -15,6 +15,8 @@ let opClicked = false;
 const currentDisplay = document.querySelector('.currentNumber');
 const previousDisplay = document.querySelector('.previousNumber');
 
+// window.addEventListener('')
+
 const buttons = document.querySelectorAll('.btn-num');
 
 const operators = document.querySelectorAll('.btn-op');
@@ -44,6 +46,10 @@ buttons.forEach(btn => {
 });
 
 function handleNumber(number) {
+    if (number === '.' && currNum.includes('.')) {
+        return;
+    }
+
     currNum += number;  // If number button append it to end of string
     changeCurrentDisplay(currNum); // Display new string
 }
@@ -56,8 +62,7 @@ operators.forEach(btn => {
 });
 
 function handleOperator(op) {
-    console.log(operator, op);
-
+    // Check whether operator is - and follows either x or /
     if (operator === 'x' && op === '-') {
         currNum = op;
         changeCurrentDisplay(currNum);
@@ -80,16 +85,6 @@ function handleOperator(op) {
         changeCurrentDisplay('0');
         changePreviousDisplay(prevNum + ' ' + operator);
     }
-
-    /* Add boolean for operatorClicked
-        - If true and op to be handled is -
-            - Add operator to currNum
-            - Display currNum
-            - Return
-        - If true and op is not -, return without doing anything
-            - Return
-        - Else carry out rest of function
-    */
 }
 
 function operatorCheck(string) {
@@ -98,84 +93,6 @@ function operatorCheck(string) {
     changeCurrentDisplay('0');
     currNum = '';
 }
-
-
-// OLD FUNCTION
-// buttons.forEach((btn, i) => {
-//     const btnText = btn.textContent;    // Get button text
-//     const btnID = btn.id;   // Get button ID
-//     const btnClass = btn.className;
-
-//     // Add operator button to objArray as objects
-//     if (btnClass === 'btn-op') {
-//         objArray.push(btnObj = {
-//             name: btnID,
-//             text: btnText,
-//             clicked: false,
-//         });
-//     }
-    
-//     // Add event listeners for button
-//     btn.addEventListener('click', () => {
-        
-//         // Set display value depending on button input
-//         if (btnID === clrBtnID) {
-            
-//             dispVal = '';   // If clear button empty string
-//             a = '';
-//             b = '';
-//             changeDisplay(dispVal); // Display new string
-            
-//         } else if (btnClass === 'btn-num') {
-//             let opObj = {};
-//             let clicked = [];
-//             // If any of the clicked booleans is true in objArray, call operate function and display result
-            
-//             // Filter objArray for clicked objects
-//             clicked = objArray.filter(function(obj) {
-//                 if (obj.clicked == true) {
-//                     return true;
-//                 }
-//             });
-            
-//             opObj = clicked[0];
-
-
-            
-//             dispVal = dispVal.concat(btnText);  // If number button append it to end of string
-//             changeDisplay(dispVal); // Display new string
-            
-//         } else if (btnClass === 'btn-op') {
-//             const index = objArray.findIndex(obj => obj.name === btnID);
-
-//             const opObj = objArray[index];
-//             opObj.clicked = true;
-//             // console.log(opObj);
-
-//             // const filtered = objArray.filter(function(obj) {
-//             //     if (obj.name === btnID) {
-//             //         return true;
-//             //     }
-//             // });
-            
-            
-//             // console.table(filtered);
-//             console.table(opObj);
-            
-//             a = dispVal;    // Store current display value
-//             op = btnText;   // Store operator button text
-//             dispVal = '';   // Reset
-            
-//         } else if (btnID === eqlBtnID) {
-            
-//             b = dispVal;
-//             dispVal = operate(op, a, b);
-//             // console.log(a, b, dispVal);
-//             changeDisplay(dispVal); // Display new string
-//         } 
-        
-//     });
-// });
 
 // Store index for each operator object in objArray
 multIndex = objArray.findIndex(obj => obj.name === 'btn-mult');
