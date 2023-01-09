@@ -26,7 +26,11 @@ const eqlBtnID = document.getElementById('btn-eql').id;
 
 const equals = document.querySelector('#btn-eql');
 // Add event listener to equals button to call operate function
-equals.addEventListener('click', operate);
+equals.addEventListener('click', () => {
+    if (currNum != '' && prevNum != '') {
+        operate();
+    }
+});
 
 
 
@@ -148,7 +152,7 @@ function clearAll() {
     prevNum = '';
     currNum = '';
     changePreviousDisplay(prevNum);
-    changeCurrentDisplay(currNum);
+    changeCurrentDisplay('0');
 }
 
 // Change display function
