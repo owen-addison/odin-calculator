@@ -54,14 +54,34 @@ operators.forEach(btn => {
 });
 
 function handleOperator(op) {
-    operator = op;
-    prevNum = currNum;
-    changePreviousDisplay(prevNum + ' ' + operator);
-    currNum = '';
-    changeCurrentDisplay(currNum);
-    // console.log(operator);
+    // console.log(prevNum, currNum);
+
+    if (prevNum === '') {
+        prevNum = currNum;
+        operatorCheck(op);
+    } else if (currNum === '') {
+        operatorCheck(op);
+    } else {
+        operate();
+        operator = op;
+        currNum = '';
+        changeCurrentDisplay('0');
+        changePreviousDisplay(prevNum + ' ' + operator);
+
+        console.log(prevNum, currNum);
+    }
+
+    // operator = op;
+    // prevNum = currNum;
+    // currNum = '';
 }
 
+function operatorCheck(string) {
+    operator = string;
+    previousDisplay.textContent = prevNum + ' ' + operator;
+    currentDisplay.textContent = '0';
+    currNum = '';
+}
 
 
 // OLD FUNCTION
@@ -219,11 +239,14 @@ function operate() {
 
     result = roundNumber(result);
     result = result.toString();
+    currNum = result;
     prevNum = result;
-    currNum = prevNum;
 
-    changePreviousDisplay('');
+
+    
     changeCurrentDisplay(currNum);
+    changePreviousDisplay('');
+    
 };
 
 function roundNumber(num) {
