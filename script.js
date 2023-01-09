@@ -1,9 +1,6 @@
 let dispVal = '';
 let a = '';
 let b = '';
-let op = '';
-let objArray = [];
-let multIndex, divIndex, subIndex, plusIndex;
 
 let prevNum = '';
 let currNum = '';
@@ -94,12 +91,6 @@ function operatorCheck(string) {
     currNum = '';
 }
 
-// Store index for each operator object in objArray
-multIndex = objArray.findIndex(obj => obj.name === 'btn-mult');
-divIndex = objArray.findIndex(obj => obj.name === 'btn-div');
-subIndex = objArray.findIndex(obj => obj.name === 'btn-sub');
-plusIndex = objArray.findIndex(obj => obj.name === 'btn-plus');
-
 // Clear fucntion
 function clearAll() {
     prevNum = '';
@@ -108,7 +99,7 @@ function clearAll() {
     changeCurrentDisplay('0');
 }
 
-// Change display function
+// Change current number display function
 function changeCurrentDisplay(string) {
     if (string.length <= 11) {
         currentDisplay.textContent = string;
@@ -117,6 +108,7 @@ function changeCurrentDisplay(string) {
     }
 };
 
+// Change previous number display function
 function changePreviousDisplay(string) {
     previousDisplay.textContent = string;
     // console.table(objArray);
